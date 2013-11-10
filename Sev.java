@@ -1,5 +1,8 @@
 package VertVSHori;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -73,7 +76,14 @@ public class Sev
 		System.out.println();
 	}
 	
-	public static void main(String[] args)
+	static void printNwrite(String p) throws IOException
+	{
+		write.write(p);
+		System.out.println(p);
+	}
+	
+	static FileWriter write;
+	public static void main(String[] args) throws IOException
 	{
 		Sev x = new Sev();
 		x.print();
@@ -85,6 +95,23 @@ public class Sev
 			offer.get(i / 7).add(i);
 		}
 		
+		File dir = new File(".");
+		File[] files = dir.listFiles();
+		int w = 0;
+		for (int f = 0; f < files.length; f++)//checks for sessions
+		{
+			if (files[f].getName().charAt(0)=='w')
+			{
+				w++;
+				if (f+1 == files.length)
+				{
+					write = new FileWriter("w"+ w +".txt");
+					break;
+				}
+			}
+		}
+		if (w == 0) write = new FileWriter("w"+ 0 +".txt");
+		
 		Scanner in = new Scanner(System.in);
 		System.out.print("AI or Manual(A or M): "); 
 		String inputChoice = in.next();
@@ -95,11 +122,11 @@ public class Sev
 			if (inputChoice.compareToIgnoreCase("M") == 0)
 			{
 				int[] bet = {0, 0};
-				System.out.println("P0 Credits: " + credit[0]);
-				System.out.print("Awaiting P1 Bet: ");
+				printNwrite("P0 Credits: " + credit[0]);
+				printNwrite("Awaiting P1 Bet: ");
 		        bet[0]  = Integer.valueOf(in.next());
-		        System.out.println("P1 Credits: " + credit[1]);
-		        System.out.print("Awaiting P2 Bet: ");
+		        printNwrite("P1 Credits: " + credit[1]);
+		        printNwrite("Awaiting P2 Bet: ");
 		        bet[1] = Integer.valueOf(in.next());
 		        
 				int winner = 0;
@@ -109,8 +136,8 @@ public class Sev
 		        else winner = 1;
 		        
 		        credit[winner] -= Integer.valueOf(bet[winner]);
-		        System.out.println("P" + winner + " WINS");
-		        System.out.println("Choose between: " + Arrays.toString(offer.get(o).toArray()));
+		        printNwrite("P" + winner + " WINS");
+		        printNwrite("Choose between: " + Arrays.toString(offer.get(o).toArray()));
 		        int pick = 0;
 		        while (true)
 		        {
