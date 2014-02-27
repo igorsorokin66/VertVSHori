@@ -94,7 +94,7 @@ public class Sev
 			if (i % 7 == 0) offer.add(new ArrayList<Integer>());
 			offer.get(i / 7).add(i);
 		}
-		
+		/*
 		File dir = new File(".");
 		File[] files = dir.listFiles();
 		int w = 0;
@@ -111,10 +111,10 @@ public class Sev
 			}
 		}
 		if (w == 0) write = new FileWriter("w"+ 0 +".txt");
-		
+		*/
 		Scanner in = new Scanner(System.in);
-		System.out.print("AI or Manual(A or M): "); 
-		String inputChoice = in.next();
+		//System.out.print("AI or Manual(A or M): "); 
+		String inputChoice = "M";//in.next();
 		
 		int[] credit = {98, 98};
 		for (int o = 0; o < 7; o++)
@@ -125,6 +125,9 @@ public class Sev
 				printNwrite("P0 Credits: " + credit[0]);
 				printNwrite("Awaiting P1 Bet: ");
 		        bet[0]  = Integer.valueOf(in.next());
+		        
+		        for (int i = 0; i < 100; i++) System.out.println("----------------------------");
+		        
 		        printNwrite("P1 Credits: " + credit[1]);
 		        printNwrite("Awaiting P2 Bet: ");
 		        bet[1] = Integer.valueOf(in.next());
@@ -153,7 +156,7 @@ public class Sev
 			else 
 			{
 				int bet1 = x.takeBid1a();
-				int bet2 = x.takeBid2a();
+				int bet2 = 0;//x.takeBid2a();
 		
 				if (bet1 < bet2) 
 				{
